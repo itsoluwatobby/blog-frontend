@@ -31,7 +31,7 @@ const PostContextProvider = ({ children }) => {
       setLoading(true)
       const fetchPosts = async() => {
          try{
-            const {data} = await axiosFetch.get()
+            const {data} = await axiosFetch.get('/posts')
             setPostData({posts: data.posts})
          }
          catch(error){
@@ -66,7 +66,7 @@ const PostContextProvider = ({ children }) => {
       else{
          setLoading(true)
          try{
-            await axiosFetch.delete(`/${id}`)
+            await axiosFetch.delete(`/posts/${id}`)
             navigate('/')
             refetch()
          }
@@ -86,7 +86,7 @@ const PostContextProvider = ({ children }) => {
          const newPost = {
             title: newPostTitle, body: newPostBody, dateTime: sub(new Date(), { minutes: 0}).toISOString()
          }
-         const { data } = await axiosFetch.post('/', newPost)
+         const { data } = await axiosFetch.post('/posts', newPost)
          const allPosts = [...posts, data.result]
          setPostData({ posts: allPosts })
          navigate('/')

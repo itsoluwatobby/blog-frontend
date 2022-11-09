@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BLOG_URL = 'http://localhost:4500/api/blog/posts';
+const BLOG_URL = 'https://blog_app.onrender.com';
 
 export const axiosFetch = axios.create({
    baseURL: BLOG_URL,
