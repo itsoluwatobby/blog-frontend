@@ -31,7 +31,6 @@ const EditPost = () => {
          const otherPosts = posts.filter(post => post._id !== id)
          const allPosts = [...otherPosts, data.currentPost]
          setPostData({ posts: allPosts })
-         setPostData({ editTitle: '', editBody: '' })
          refetch()
          navigate(`/post/${id}`)
       }

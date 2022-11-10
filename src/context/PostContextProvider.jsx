@@ -95,7 +95,6 @@ const PostContextProvider = ({ children }) => {
          const { data } = await axiosFetch.post('/posts', newPost)
          const allPosts = [...posts, data.result]
          setPostData({ posts: allPosts })
-         setPostData({ newPostTitle: '', newPostBody: '' })
          navigate('/')
       }
       catch(error){
