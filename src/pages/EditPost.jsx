@@ -2,6 +2,7 @@ import { sub } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosFetch } from '../axios/axiosFetch';
+import Spinner from '../components/Spinner';
 import { PostContext } from '../context/PostContextProvider';
 
 const EditPost = () => {
@@ -10,7 +11,8 @@ const EditPost = () => {
    
    const [editTitle, setEditTitle] = useState('');
    const [editBody, setEditBody] = useState('')
-   const { posts, setPostData, refetch } = useContext(PostContext);
+   const [loading, setLoading] = useState(false)
+   const { posts, setPostData, refetch, error } = useContext(PostContext);
 
    const targetPost = posts.find(post => (post._id).toString() === postID)
 
@@ -24,21 +26,30 @@ const EditPost = () => {
       const newDate = sub(new Date(), { minutes: 0}).toISOString()
       const editedPost = { title: editTitle, body: editBody, dateTime: newDate }
       try{
+         setLoading(true)
          const { data } = await axiosFetch.patch(`/posts/${id}`, editedPost)
          const otherPosts = posts.filter(post => post._id !== id)
          const allPosts = [...otherPosts, data.currentPost]
-   
          setPostData({ posts: allPosts })
+         setPostData({ editTitle: '', editBody: '' })
          refetch()
          navigate(`/post/${id}`)
       }
       catch(error){
-         setPostData({error: true})
+         setLoading(false)
+         !error.response && setPostData({error: 'No server response'})
+         error.response?.status === 403 && setPostData({error: 'Post Id required'})
+         error.response?.status === 404 && setPostData({error: `Post with id: ${id} not found`})
+         error.response?.status === 500 && setPostData({error: 'Unable to update post'})
+      }finally{
+         setLoading(false)
       }
    }
 
   return (
     <div className='flex flex-col justify-center items-center md:max-w-[50vw]'>
+      {loading && <Spinner />}
+      {!loading && error && <p className='text-red-600 text-center mt-5 text-4xl'>{error}</p>}
       <h1 className='text-3xl nest-hub:text-[36px] nest-hub:font-semibold nest-hub:py-4 text-gray-900 shadow-md text-center w-full mt-7'>Edit Post</h1>
       <div className='flex flex-col justify-center items-center mx-3 my-5 gap-5'>
          <div className='flex flex-col'>

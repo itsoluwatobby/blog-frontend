@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 import { PostContext } from '../context/PostContextProvider';
 
 const SinglePost = () => {
    const { postID } = useParams()
-   const { posts, handleDelete, dateFormatter, error } = useContext(PostContext);
+   const { posts, handleDelete, dateFormatter, error, loading } = useContext(PostContext);
 
    const targetPost = posts.find(post => (post._id).toString() === postID)
 
@@ -16,6 +17,7 @@ const SinglePost = () => {
    <section>
       {targetPost ? (
          <div className='flex flex-col gap-3 p-2 shadow-lg mt-2 mx-2 font-serif'>
+            {loading && <Spinner />}
             <div className='flex flex-col space-y-5'>
                <p className='shadow-md text-center text-3xl text-gray-800 underline capitalize tracking-wide'>{(targetPost.title).length > 30 ? `${(targetPost.title).substring(0, 30)} ....` : targetPost.title }</p>
                <p className='tracking-medium break-normal leading-5 text-[20px] text-black'><span className='capitalize'>{targetPost.body.slice(0, 1)}</span>{targetPost.body.slice(1)}</p>

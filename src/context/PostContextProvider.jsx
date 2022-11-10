@@ -36,7 +36,9 @@ const PostContextProvider = ({ children }) => {
          }
          catch(error){
             setLoading(false)
-            setPostData({error: 'Error fetching posts'})
+            !error.response && setPostData({error: 'No server response'})
+            error.response?.status === 400 && setPostData({error: 'No post available'})
+            error.response?.status === 500 && setPostData({error: 'Error fetching posts'})
          }
          finally{
             setLoading(false)
@@ -72,7 +74,10 @@ const PostContextProvider = ({ children }) => {
             refetch()
          }
          catch(error){
-            setPostData({error: 'Unable to delete post'})
+            setLoading(false)
+            !error.response && setPostData({error: 'No server response'})
+            error.response?.status === 400 && setPostData({error: 'Post not found'})
+            error.response?.status === 500 && setPostData({error: 'Unable to delete post'})
          }
          finally{
             setLoading(false)
@@ -90,10 +95,14 @@ const PostContextProvider = ({ children }) => {
          const { data } = await axiosFetch.post('/posts', newPost)
          const allPosts = [...posts, data.result]
          setPostData({ posts: allPosts })
+         setPostData({ newPostTitle: '', newPostBody: '' })
          navigate('/')
       }
       catch(error){
-         setPostData({error: 'Error submitting post'})
+         setLoading(false)
+         !error.response && setPostData({error: 'No server response'})
+         error.response?.status === 400 && setPostData({error: 'Post title taken'})
+         error.response?.status === 500 && setPostData({error: 'Error submitting post'})
       }
       finally{
          setLoading(false)
