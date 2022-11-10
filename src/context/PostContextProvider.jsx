@@ -12,7 +12,7 @@ const PostContextProvider = ({ children }) => {
       posts: [],
       newPostTitle: '',
       newPostBody: '',
-      error: false
+      error: ''
    });
    const { posts, newPostTitle, newPostBody, error } = postData
    const navigate = useNavigate();
@@ -36,7 +36,7 @@ const PostContextProvider = ({ children }) => {
          }
          catch(error){
             setLoading(false)
-            setPostData({error: true})
+            setPostData({error: 'Error fetching posts'})
          }
          finally{
             setLoading(false)
@@ -58,7 +58,8 @@ const PostContextProvider = ({ children }) => {
    }
 
    const handleDelete = async (id) => {
-      if(posts.length < 2) {
+      if(posts.length <= 3) {
+         setPostData({error: 'Unauthorised'})
          refetch()
          navigate('/')
          return
@@ -71,7 +72,7 @@ const PostContextProvider = ({ children }) => {
             refetch()
          }
          catch(error){
-            setPostData({error: true})
+            setPostData({error: 'Unable to delete post'})
          }
          finally{
             setLoading(false)
@@ -92,7 +93,7 @@ const PostContextProvider = ({ children }) => {
          navigate('/')
       }
       catch(error){
-         setPostData({error: true})
+         setPostData({error: 'Error submitting post'})
       }
       finally{
          setLoading(false)

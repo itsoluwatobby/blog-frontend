@@ -4,9 +4,13 @@ import { PostContext } from '../context/PostContextProvider';
 
 const SinglePost = () => {
    const { postID } = useParams()
-   const { posts, handleDelete, dateFormatter } = useContext(PostContext);
+   const { posts, handleDelete, dateFormatter, error } = useContext(PostContext);
 
    const targetPost = posts.find(post => (post._id).toString() === postID)
+
+   if(error) {
+      return <p className='text-red-600 text-center mt-5 text-4xl'>{error}</p>
+   }
 
   return (
    <section>
