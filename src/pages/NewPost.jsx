@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
+import Spinner from '../components/Spinner';
 import { PostContext } from '../context/PostContextProvider';
 
 const NewPost = () => {
-   const { handleChange, handleSubmit } = useContext(PostContext)
+   const { handleChange, handleSubmit, loading } = useContext(PostContext)
 
   return (
       <div className='flex flex-col justify-center items-center md:max-w-[50vw]'>
          <h1 className='shadow-md text-3xl text-gray-900 text-center w-full mt-6 nest-hub:text-[36px] nest-hub:font-semibold nest-hub:py-4'>New Post</h1>
+         {loading && <Spinner />}
          <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center mx-3 my-5 gap-5'>
                <div className='flex flex-col w-fit'>
                   <label htmlFor="postTitle" className='text-[20px] tracking-wide text-gray-800 font-mono nest-hub:text-[32px]'>Post Title:</label>

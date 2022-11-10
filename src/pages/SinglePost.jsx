@@ -11,10 +11,10 @@ const SinglePost = () => {
   return (
    <section>
       {targetPost ? (
-         <div className='flex flex-col gap-3 p-2 shadow-lg mt-2 mx-2'>
+         <div className='flex flex-col gap-3 p-2 shadow-lg mt-2 mx-2 font-serif'>
             <div className='flex flex-col space-y-5'>
                <p className='shadow-md text-center text-3xl text-gray-800 underline capitalize tracking-wide'>{(targetPost.title).length > 30 ? `${(targetPost.title).substring(0, 30)} ....` : targetPost.title }</p>
-               <p className='tracking-medium break-all leading-5 font-mono text-[20px] text-black'><span className='capitalize'>{targetPost.body.slice(0, 1)}</span>{targetPost.body.slice(1)}</p>
+               <p className='tracking-medium break-normal leading-5 text-[20px] text-black'><span className='capitalize'>{targetPost.body.slice(0, 1)}</span>{targetPost.body.slice(1)}</p>
                <p className='text-gray-600'>Posted - {dateFormatter(targetPost.dateTime)}</p>
             </div>
             <div className='flex justify-between items-center'>

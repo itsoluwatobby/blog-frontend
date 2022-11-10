@@ -24,7 +24,7 @@ const EditPost = () => {
       const newDate = sub(new Date(), { minutes: 0}).toISOString()
       const editedPost = { title: editTitle, body: editBody, dateTime: newDate }
       try{
-         const { data } = await axiosFetch.patch(`/${id}`, editedPost)
+         const { data } = await axiosFetch.patch(`/posts/${id}`, editedPost)
          const otherPosts = posts.filter(post => post._id !== id)
          const allPosts = [...otherPosts, data.currentPost]
    
@@ -42,7 +42,7 @@ const EditPost = () => {
       <h1 className='text-3xl nest-hub:text-[36px] nest-hub:font-semibold nest-hub:py-4 text-gray-900 shadow-md text-center w-full mt-7'>Edit Post</h1>
       <div className='flex flex-col justify-center items-center mx-3 my-5 gap-5'>
          <div className='flex flex-col'>
-               <label htmlFor="editTitle" className='nest-hub:text-[32px] text-[20px] tracking-wide left-0 ml-0 text-gray-800 font-mono'>Edit Title:</label>
+               <label htmlFor="editTitle" className='nest-hub:text-[32px] text-[20px] break-normal tracking-wide left-0 ml-0 text-gray-800 font-serif'>Edit Title:</label>
                <input 
                   type="text"
                   id='editTitle'
@@ -60,7 +60,7 @@ const EditPost = () => {
                rows={8}
                value={editBody}
                onChange={e => setEditBody(e.target.value)}
-               className='nest-hub:w-[95vw] nest-hub:py-10 nest-hub:text-[32px] w-[73vw] md:max-w-[47vw] border-none text-black font-serif shadow-md bg-white rounded-lg px-3 tracking-wide indent-2 break-all small:w-[90vw]' 
+               className='nest-hub:w-[95vw] nest-hub:py-10 nest-hub:text-[32px] w-[73vw] md:max-w-[47vw] border-none text-black font-serif shadow-md bg-white rounded-lg px-3 tracking-wide indent-2 break-normal small:w-[90vw]' 
             />
          </div>
          <button onClick={() => handleEdit(targetPost._id)} className='nest-hub:w-[95vw] bg-green-500 w-[73vw] p-2 rounded-lg shadow hover:bg-green-400 active:bg-green-500 transition duration-200 ease-in-out cursor-pointer text-[18px] font-semibold small:w-[90vw]'>Submit Post</button>
