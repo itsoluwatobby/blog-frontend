@@ -63,7 +63,7 @@ const EditPost = () => {
                className='nest-hub:w-[95vw] nest-hub:py-10 nest-hub:text-[32px] w-[73vw] md:max-w-[47vw] border-none text-black font-serif shadow-md bg-white rounded-lg px-3 tracking-wide indent-2 break-normal small:w-[90vw]' 
             />
          </div>
-         <button onClick={() => handleEdit(targetPost._id)} className='nest-hub:w-[95vw] bg-green-500 w-[73vw] p-2 rounded-lg shadow hover:bg-green-400 active:bg-green-500 transition duration-200 ease-in-out cursor-pointer text-[18px] font-semibold small:w-[90vw]'>Submit Post</button>
+         <button onClick={() => handleEdit(targetPost._id)} className='nest-hub:w-[95vw] bg-green-500 w-[73vw] p-2 rounded-lg shadow hover:bg-green-400 active:bg-green-500 transition duration-200 ease-in-out cursor-pointer text-[18px] font-semibold small:w-[90vw]'>Update Post</button>
       </div>   
     </div>
   );
