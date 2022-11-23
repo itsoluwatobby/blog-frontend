@@ -1,10 +1,13 @@
-# Full Stack Blog Chat
+# BLOG APPPLIATION
+[Blog application](https://blog-app-ipou.onrender.com "blog page")
+### A simple blog application where a user can perform a **CRUD** operations
+___
+-Features-
+1. Post creation
+2. Post deletion
+3. Post update
+4. Reading posts
+5. Post search
 
-
-##### Features
-[x]- Search posts
-[x]- Create posts
-[x]- Update posts
-[x]- Delete posts
-[x]- Paged posts
-[x]- Get all posts
+**Here is the link to the full working site**
+[Blog application](https://blog-app-ipou.onrender.com "blog page")
