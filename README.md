@@ -1,4 +1,4 @@
-# BLOG APPPLIATION
+# BLOG APPPLICATION
 [Blog application](https://blog-app-ipou.onrender.com "blog page")
 ### A simple blog application where a user can perform a **CRUD** operations
 ___
