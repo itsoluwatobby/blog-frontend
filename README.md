@@ -2,7 +2,7 @@
 [Blog application](https://blog-app-ipou.onrender.com "blog page")
 ### A simple blog application where a user can perform a **CRUD** operations
 ___
--Features-
+*Features*
 1. Post creation
 2. Post deletion
 3. Post update
